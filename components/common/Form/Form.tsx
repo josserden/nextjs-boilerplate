@@ -33,7 +33,6 @@ export const Form: FC = () => {
           <Input
             {...register('name')}
             error={errors.name?.message}
-            aria-invalid={errors.name ? 'true' : 'false'}
             placeholder="John Doe"
           />
         </Label>
