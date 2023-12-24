@@ -13,6 +13,9 @@ import { schema } from './constants';
 
 type Inputs = Record<string, object>;
 
+// eslint-disable-next-line no-console
+const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+
 export const Form: FC = () => {
   const {
     register,
@@ -23,8 +26,6 @@ export const Form: FC = () => {
     mode: 'onChange',
     resolver: zodResolver(schema),
   });
-
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
 
   return (
     <form className="mx-auto w-full max-w-md" onSubmit={handleSubmit(onSubmit)}>

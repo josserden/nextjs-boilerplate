@@ -2,12 +2,13 @@ import './globals.css';
 
 import React, { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
-import type { Metadata } from 'next';
 import { NextFont } from 'next/dist/compiled/@next/font';
 import clsx from 'clsx';
 
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+
+import type { Metadata } from 'next';
 
 const inter: NextFont = Inter({ subsets: ['latin'] });
 
