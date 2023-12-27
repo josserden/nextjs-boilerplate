@@ -9,7 +9,7 @@ import { MobileMenu } from './MobileMenu';
 
 import Logo from '@/public/vercel.svg';
 
-export const Header: FC = () => {
+export const Header: FC = ({ ...props }) => {
   const [isBrowser, setIsBrowser] = useState<boolean>(false);
   const [isMenuOpen, toggleMenu] = useToggle(false);
   const isMobile = useMedia('(max-width: 767px)');
@@ -30,7 +30,11 @@ export const Header: FC = () => {
   }, [isBrowser, isMobile, toggleMenu]);
 
   return (
-    <header className="relative border-b border-gray-300 py-6" role="banner">
+    <header
+      className="relative border-b border-gray-300 py-6"
+      role="banner"
+      {...props}
+    >
       <div className="container flex items-center justify-between">
         <Logo className="w-24" />
 

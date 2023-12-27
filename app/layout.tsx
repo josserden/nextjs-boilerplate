@@ -32,7 +32,9 @@ export default function RootLayout({ children }: Props) {
       >
         <Header />
 
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow" role="main">
+          {children}
+        </main>
 
         <Footer />
       </body>
