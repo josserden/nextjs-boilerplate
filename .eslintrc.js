@@ -13,6 +13,7 @@ module.exports = {
     'plugin:jsx-a11y/recommended',
     'prettier',
     'plugin:unicorn/recommended',
+    'plugin:sonarjs/recommended',
   ],
   overrides: [
     {
@@ -36,6 +37,7 @@ module.exports = {
     'jsx-a11y',
     'unicorn',
     'react',
+    'sonarjs',
   ],
   rules: {
     '@typescript-eslint/no-unused-vars': [
@@ -45,24 +47,31 @@ module.exports = {
       },
     ],
     'no-undef': 'off',
-    'react-hooks/exhaustive-deps': 'error',
-    'react-hooks/rules-of-hooks': 'error',
     'no-console': [
       'error',
       {
-        allow: ['error'],
+        allow: ['error', 'info', 'warn'],
       },
     ],
     'no-await-in-loop': 'error',
     'no-constant-binary-expression': 'off',
     'no-duplicate-imports': 'error',
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true, allowExportNames: ['metadata'] },
+    ],
+    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/rules-of-hooks': 'error',
+    'sonarjs/cognitive-complexity': 'error',
+    'sonarjs/no-identical-expressions': 'error',
+    'unicorn/filename-case': 'off',
     'unicorn/empty-brace-spaces': 'error',
     'unicorn/no-array-for-each': 'off',
     'unicorn/no-array-reduce': 'off',
     'unicorn/no-console-spaces': 'error',
     'unicorn/no-null': 'off',
-    'unicorn/switch-case-braces': 'off',
     'unicorn/prefer-module': 'off',
+    'unicorn/switch-case-braces': 'off',
     'unicorn/prevent-abbreviations': [
       'error',
       {
@@ -84,11 +93,6 @@ module.exports = {
         ignore: ['semVer', 'SemVer'],
       },
     ],
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true, allowExportNames: ['metadata'] },
-    ],
-    'unicorn/filename-case': 'off',
   },
   settings: {
     react: {

@@ -1,7 +1,8 @@
 import React, { ForwardedRef, forwardRef } from 'react';
-import clsx from 'clsx';
 
-import { InputProps } from '../Input';
+import { classnames } from '@/utils/classnames';
+
+import { InputProps } from '@/components/form/Input';
 
 export const Checkbox = forwardRef(
   (
@@ -18,7 +19,7 @@ export const Checkbox = forwardRef(
         <input
           ref={ref}
           type="checkbox"
-          className={clsx(
+          className={classnames(
             'rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:ring-offset-0',
             {
               'border-rose-500 focus:border-rose-300 focus:ring-rose-200':
@@ -31,7 +32,7 @@ export const Checkbox = forwardRef(
         />
 
         <span
-          className={clsx('ml-2', {
+          className={classnames('ml-2', {
             'text-rose-500': error,
           })}
         >

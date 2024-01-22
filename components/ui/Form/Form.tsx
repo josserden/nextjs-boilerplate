@@ -4,17 +4,16 @@ import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Button } from '@/components/common/Button';
-import { Label } from './Label';
-import { Input } from './Input';
-import { TextArea } from './TextArea';
-import { Checkbox } from './Checkbox';
-import { schema } from './constants';
+import { Button } from '@/components/button/Button';
+import { Checkbox } from '@/components/form/Checkbox';
+import { Input } from '@/components/form/Input';
+import { Label } from '@/components/form/Label';
+import { TextArea } from '@/components/form/TextArea';
+import { schema } from '@/utils/validationSchema';
 
 type Inputs = Record<string, object>;
 
-// eslint-disable-next-line no-console
-const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+const onSubmit: SubmitHandler<Inputs> = data => console.info(data);
 
 export const Form: FC = () => {
   const {

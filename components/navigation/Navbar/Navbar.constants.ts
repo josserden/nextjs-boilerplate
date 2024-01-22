@@ -1,4 +1,4 @@
-import { NavbarLinkProps } from './NavbarLink';
+import { NavbarLinkProps } from '@/components/navigation/NavbarLink';
 
 export const menuItems: NavbarLinkProps[] = [
   {

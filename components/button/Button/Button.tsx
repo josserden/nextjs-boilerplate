@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC } from 'react';
-import clsx from 'clsx';
+
+import { classnames } from '@/utils/classnames';
 
 export interface ButtonProps
   extends DetailedHTMLProps<
@@ -13,7 +14,7 @@ export interface ButtonProps
 export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
   return (
     <button
-      className={clsx(
+      className={classnames(
         'inline-flex items-center justify-center gap-4',
         className,
       )}

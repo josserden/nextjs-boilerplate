@@ -1,7 +1,7 @@
 import React, { DetailedHTMLProps, ForwardedRef, forwardRef } from 'react';
-import clsx from 'clsx';
 
-import { ErrorMessage } from '../ErrorMessage';
+import { classnames } from '@/utils/classnames';
+import { ErrorMessage } from '@/components/form/ErrorMessage';
 
 export interface InputProps
   extends DetailedHTMLProps<
@@ -21,7 +21,7 @@ export const Input = forwardRef(
       <>
         <input
           ref={ref}
-          className={clsx(
+          className={classnames(
             'inputDefault',
             {
               inputError: error,

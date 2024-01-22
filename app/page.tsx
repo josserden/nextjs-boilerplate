@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next/types';
 
-import { Form } from '@/components/common/Form';
+import { Form } from '../components/ui/Form';
 
 const Page: NextPage = () => {
   return (

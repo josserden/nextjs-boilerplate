@@ -96,8 +96,10 @@ result. Congratulations! You've successfully started your Next.js project.
 ├── .husky -> folder with githooks
 |-- app -> folder with the main code of the project (pages, layout, etc.)
 |-- components -> folder with reusable components
-    |-- common -> components that are used in more than one module
-    |-- layout -> components that are used in the layout
+    |-- button -> folder with buttons components
+    |-- form -> folder with form components
+    |-- navigation -> folder with navigation components
+    |-- ui -> folder with ui components
 |-- public -> folder with static files (images, fonts, etc.)
 <!-- You can create these folders already in work -->
 |-- data -> data for the project ( from graphql, json, etc.)
@@ -124,13 +126,9 @@ result. Congratulations! You've successfully started your Next.js project.
         ├── Header
             ├── index.ts -> file for re->export
             ├── Header.tsx -> main component
-            ├── constants.ts -> constants for this component
             ├── Logo -> folder with component for this module
                 ├── index.ts
                 ├── Logo.tsx
-            ├── Menu -> folder with component for this module
-                ├── index.ts
-                ├── Menu.tsx
         ├── Footer
             ├── index.ts
             ├── Footer.tsx

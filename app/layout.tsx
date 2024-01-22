@@ -3,10 +3,10 @@ import './globals.css';
 import React, { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import { NextFont } from 'next/dist/compiled/@next/font';
-import clsx from 'clsx';
 
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
+import { classnames } from '@/utils/classnames';
+import { Header } from '../components/ui/Header';
+import { Footer } from '../components/ui/Footer';
 
 import type { Metadata } from 'next';
 
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body
-        className={clsx(
+        className={classnames(
           inter.className,
           'flex h-full min-h-screen flex-col bg-slate-50',
         )}

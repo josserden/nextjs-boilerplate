@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import clsx from 'clsx';
+
+import { classnames } from '@/utils/classnames';
 
 type Props = {
   children: React.ReactNode;
@@ -9,7 +10,7 @@ type Props = {
 
 export const Label: FC<Props> = ({ labelText, children, className }) => {
   return (
-    <label className={clsx('relative', className)}>
+    <label className={classnames('relative', className)}>
       {labelText && <span className="text-gray-700">{labelText}</span>}
       {children}
     </label>
