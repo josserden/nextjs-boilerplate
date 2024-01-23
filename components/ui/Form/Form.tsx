@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Button } from '@/components/button/Button';
+import { Button } from '../Button';
 import { Checkbox } from '@/components/form/Checkbox';
 import { Input } from '@/components/form/Input';
 import { Label } from '@/components/form/Label';

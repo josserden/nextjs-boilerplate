@@ -2,7 +2,7 @@
 
 import React, { FC } from 'react';
 
-import { IconButton } from '@/components/button/IconButton';
+import { Button } from '@/components/ui/Button';
 import { MobileMenu } from '@/components/ui/MobileMenu';
 import { Navbar } from '@/components/navigation/Navbar';
 import { useBrowser } from '@/hooks/useBrowser';
@@ -24,13 +24,13 @@ export const Header: FC = ({ ...props }) => {
         <Logo className="w-24" />
 
         {isBrowser && isMobile && (
-          <IconButton
+          <Button
             className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             type="button"
             onClick={toggleMenu}
           >
             {isMenuOpen ? 'Close' : 'Menu'}
-          </IconButton>
+          </Button>
         )}
 
         {isBrowser && isMenuOpen && <MobileMenu />}
