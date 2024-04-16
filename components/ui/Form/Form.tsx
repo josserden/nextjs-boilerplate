@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Button } from '../Button';
+import { Button } from '@/components/ui/Button';
 import { Checkbox } from '@/components/form/Checkbox';
 import { Input } from '@/components/form/Input';
 import { Label } from '@/components/form/Label';
@@ -66,7 +66,7 @@ export const Form: FC = () => {
         </div>
 
         <Button
-          className="rounded-md bg-indigo-500 px-5 py-3 font-bold text-white transition duration-300 ease-in-out hover:bg-indigo-600"
+          className="gap-x-6 rounded-md bg-indigo-500 px-5 py-3 font-bold text-white transition duration-300 ease-in-out hover:bg-indigo-600"
           type="submit"
         >
           Submit
