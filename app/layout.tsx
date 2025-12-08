@@ -1,42 +1,40 @@
 import './globals.css';
-
-import React, { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
-import { NextFont } from 'next/dist/compiled/@next/font';
 
-import { classnames } from '@/utils/classnames';
-import { Header } from '../components/ui/Header';
-import { Footer } from '../components/ui/Footer';
+import { Footer } from '@/app/_modules/layout/Footer';
+import { Header } from '@/app/_modules/layout/Header';
+import { cn } from '@/app/_shared/lib/utils';
+import Providers from '@/app/providers';
 
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 
-const inter: NextFont = Inter({ subsets: ['latin'] });
+const interSans = Inter({
+  variable: '--font-geist-sans',
+  subsets: ['latin', 'cyrillic'],
+});
 
 export const metadata: Metadata = {
   title: 'Next.js Starter',
   description: 'A starter for Next.js projects.',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
-type Props = {
+export default function RootLayout({
+  children,
+}: Readonly<{
   children: ReactNode;
-};
-
-export default function RootLayout({ children }: Props) {
+}>) {
   return (
-    <html lang="en">
-      <body
-        className={classnames(
-          inter.className,
-          'flex h-full min-h-screen flex-col bg-slate-50',
-        )}
-      >
-        <Header />
-
-        <main className="flex-grow" role="main">
-          {children}
-        </main>
-
-        <Footer />
+    <html lang='en'>
+      <body className={cn('flex min-h-dvh flex-col antialiased', interSans.variable)}>
+        <Providers>
+          <Header />
+          <main className='flex-1'>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

@@ -1,23 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer base {
-  html {
-    @apply scroll-smooth;
-  }
-
-  body {
-  }
+html {
+  @apply scroll-smooth;
 }
 
-@layer components {
-  /* Form */
-  .inputDefault {
-    @apply mt-1 block w-full rounded-md border-gray-300 shadow-sm placeholder:text-sm placeholder:text-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50;
-  }
-
-  .inputError {
-    @apply border-rose-500 focus:border-rose-300 focus:ring-rose-200;
-  }
+@utility container {
+  @apply mx-auto px-4 xl:max-w-7xl xl:p-0;
 }
