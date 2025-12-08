@@ -4,9 +4,10 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { throttle } from 'nuqs';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { type ReactNode } from 'react';
 
 import { getQueryClient } from '@/app/_shared/lib/tanstack/get-query-client';
+
+import type { ReactNode } from 'react';
 
 export default function Providers({ children }: { children: ReactNode }) {
   const queryClient = getQueryClient();
