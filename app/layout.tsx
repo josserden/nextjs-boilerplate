@@ -1,8 +1,8 @@
-import './globals.css';
+import '@/app/_shared/styles/globals.css';
 import { Inter } from 'next/font/google';
 
-import { Footer } from '@/app/_modules/layout/Footer';
-import { Header } from '@/app/_modules/layout/Header';
+import { Footer } from '@/app/_shared/components/layout/Footer';
+import { Header } from '@/app/_shared/components/layout/Header';
 import { cn } from '@/app/_shared/lib/utils';
 import Providers from '@/app/providers';
 
