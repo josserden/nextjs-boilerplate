@@ -18,11 +18,13 @@ Modern Next.js boilerplate built with the latest technologies and best practices
 ## Tech Stack
 
 ### Core
+
 - [Next.js 16](https://nextjs.org/) - React framework with App Router
 - [React 19](https://react.dev/) - Latest React with concurrent features
 - [TypeScript 5](https://www.typescriptlang.org/) - Type-safe JavaScript
 
 ### Styling
+
 - [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS framework
 - [Radix UI](https://www.radix-ui.com/) - Accessible component primitives
 - [Lucide React](https://lucide.dev/) - Beautiful icon library
@@ -30,12 +32,14 @@ Modern Next.js boilerplate built with the latest technologies and best practices
 - [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Merge Tailwind classes
 
 ### Data & Forms
+
 - [TanStack Query](https://tanstack.com/query) - Powerful data fetching and state management
 - [React Hook Form](https://react-hook-form.com/) - Performant form library
 - [Zod](https://zod.dev/) - TypeScript-first schema validation
 - [nuqs](https://nuqs.47ng.com/) - Type-safe URL state management
 
 ### Development Tools
+
 - [ESLint 9](https://eslint.org/) - Linting with flat config
 - [Prettier](https://prettier.io/) - Code formatting
 - [TypeScript ESLint](https://typescript-eslint.io/) - TypeScript linting rules
@@ -114,12 +118,14 @@ nextjs-boilerplate/
 #### Pre-built Components
 
 **Layout Components:**
+
 - `Header` - Responsive header with desktop/mobile navigation
 - `Footer` - Site footer
 - `Navbar` - Navigation links
 - `MobileMenu` - Mobile slide-out menu with Sheet component
 
 **UI Components (Radix UI based):**
+
 - `Button` - Multiple variants and sizes
 - `Input` / `Textarea` - Form inputs
 - `Label` / `Field` - Form field wrappers
@@ -129,6 +135,7 @@ nextjs-boilerplate/
 - `NavLink` - Active link with highlighting
 
 **Utility Components:**
+
 - `Show` - Conditional rendering wrapper
 - `List` - Array mapping helper
 - `Form` - React Hook Form wrapper with Zod validation
@@ -142,6 +149,7 @@ nextjs-boilerplate/
 ### Best Practices
 
 **Component Organization:**
+
 ```
 ✅ Good Structure
 ├── components/
@@ -153,11 +161,13 @@ nextjs-boilerplate/
 ```
 
 **Server vs Client Components:**
+
 - Keep components server-side by default
 - Only add `'use client'` when necessary (hooks, event handlers)
 - Current layout components are server-side for optimal performance
 
 **Styling:**
+
 - Use Tailwind utility classes
 - Add global styles to `app/_shared/styles/globals.css`
 - Use `cn()` utility for conditional classes
