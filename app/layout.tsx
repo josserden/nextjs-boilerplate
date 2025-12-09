@@ -1,9 +1,9 @@
 import '@/app/_shared/styles/globals.css';
 import { Inter } from 'next/font/google';
 
-import { Footer } from '@/app/_shared/components/layout/Footer';
-import { Header } from '@/app/_shared/components/layout/Header';
-import { cn } from '@/app/_shared/lib/utils';
+import { Footer } from '@/app/_shared/components/layout/footer';
+import { Header } from '@/app/_shared/components/layout/header';
+import { cn } from '@/app/_shared/utils/cn';
 import Providers from '@/app/providers';
 
 import type { Metadata } from 'next';

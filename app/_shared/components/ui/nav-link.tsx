@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { cn } from '@/app/_shared/lib/utils';
+import { cn } from '@/app/_shared/utils/cn';
 
 import type { LinkProps } from 'next/link';
 import type { ComponentPropsWithoutRef } from 'react';

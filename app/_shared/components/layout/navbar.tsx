@@ -1,6 +1,6 @@
-import { NavLink } from '@/app/_shared/components/ui/NavLink';
-import { List } from '@/app/_shared/components/utilities/List';
-import { cn } from '@/app/_shared/lib/utils';
+import { NavLink } from '@/app/_shared/components/ui/nav-link';
+import { List } from '@/app/_shared/components/utilities/list';
+import { cn } from '@/app/_shared/utils/cn';
 
 import type { ComponentPropsWithoutRef } from 'react';
 

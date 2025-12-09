@@ -1,4 +1,4 @@
-import { cn } from '@/app/_shared/lib/utils';
+import { cn } from '@/app/_shared/utils/cn';
 
 import type { ReactNode } from 'react';
 

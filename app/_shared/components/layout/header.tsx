@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Navbar } from '@/app/_shared/components/layout/Navbar';
+import { Navbar } from '@/app/_shared/components/layout/navbar';
 
 export function Header() {
   return (
