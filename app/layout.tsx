@@ -1,13 +1,13 @@
-import '@/app/_shared/styles/globals.css';
+import '@/app/globals.css';
 import { Inter } from 'next/font/google';
 
-import { Footer } from '@/app/_shared/components/layout/footer';
-import { Header } from '@/app/_shared/components/layout/header';
+import { Footer } from '@/app/_layout/footer';
+import { Header } from '@/app/_layout/header';
 import { cn } from '@/app/_shared/utils/cn';
 import Providers from '@/app/providers';
 
+import type { LayoutProps } from '@/app/_shared/types/common';
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 
 const interSans = Inter({
   variable: '--font-geist-sans',
@@ -22,11 +22,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang='en'>
       <body className={cn('flex min-h-dvh flex-col antialiased', interSans.variable)}>

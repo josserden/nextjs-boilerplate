@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
-import { MobileMenu } from '@/app/_shared/components/layout/mobile-menu';
-import { Navbar } from '@/app/_shared/components/layout/navbar';
+import { MobileMenu } from '@/app/_layout/mobile-menu';
+import { Navbar } from '@/app/_layout/navbar';
 
 export function Header() {
   return (

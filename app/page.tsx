@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Form } from '@/app/_shared/components/forms/form';
 
 export default function Home() {

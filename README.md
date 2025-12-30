@@ -25,11 +25,12 @@ Modern Next.js boilerplate built with the latest technologies and best practices
 
 ### Styling
 
-- [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS framework
+- [Tailwind CSS 4](https://tailwindcss.com/) - Utility-first CSS framework with modern features
 - [Radix UI](https://www.radix-ui.com/) - Accessible component primitives
 - [Lucide React](https://lucide.dev/) - Beautiful icon library
 - [class-variance-authority](https://cva.style/) - Component variants
 - [tailwind-merge](https://github.com/dcastil/tailwind-merge) - Merge Tailwind classes
+- [tw-animate-css](https://www.npmjs.com/package/tw-animate-css) - Animation utilities
 
 ### Data & Forms
 
@@ -85,11 +86,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```
 nextjs-boilerplate/
 ├── app/
+│   ├── _layout/              # Layout components
+│   │   ├── header.tsx        # Header with navigation
+│   │   ├── footer.tsx        # Footer
+│   │   ├── navbar.tsx        # Navigation links
+│   │   └── mobile-menu.tsx   # Mobile slide-out menu
 │   ├── _shared/              # Shared resources across the app
 │   │   ├── actions/          # Server Actions
 │   │   ├── components/
 │   │   │   ├── forms/        # Form components (Form wrapper)
-│   │   │   ├── layout/       # Layout components (Header, Footer, Navbar, MobileMenu)
 │   │   │   ├── ui/           # UI primitives (Button, Input, Sheet, etc.)
 │   │   │   └── utilities/    # Utility components (Show, List)
 │   │   ├── config/           # App configuration
@@ -98,11 +103,11 @@ nextjs-boilerplate/
 │   │   ├── lib/              # Third-party library configurations (TanStack Query)
 │   │   ├── queries/          # TanStack Query queries
 │   │   ├── schemas/          # Zod validation schemas
-│   │   ├── styles/           # Global styles
 │   │   ├── types/            # TypeScript type definitions
 │   │   └── utils/            # Utility functions (cn)
 │   ├── api/                  # API routes
 │   │   └── health/           # Health check endpoint
+│   ├── globals.css           # Global styles (Tailwind CSS 4)
 │   ├── layout.tsx            # Root layout
 │   ├── page.tsx              # Home page
 │   ├── providers.tsx         # App providers (QueryClient)
@@ -117,12 +122,12 @@ nextjs-boilerplate/
 
 #### Pre-built Components
 
-**Layout Components:**
+**Layout Components** (`app/_layout/`):
 
-- `Header` - Responsive header with desktop/mobile navigation
-- `Footer` - Site footer
-- `Navbar` - Navigation links
-- `MobileMenu` - Mobile slide-out menu with Sheet component
+- `header.tsx` - Responsive header with desktop/mobile navigation
+- `footer.tsx` - Site footer
+- `navbar.tsx` - Navigation links
+- `mobile-menu.tsx` - Mobile slide-out menu with Sheet component
 
 **UI Components (Radix UI based):**
 
@@ -146,18 +151,40 @@ nextjs-boilerplate/
 - TanStack Query client configuration with optimized defaults
 - Type-safe constants for client detection and cache timing
 
+#### Styling Features
+
+**Tailwind CSS 4 Setup:**
+
+- Modern import syntax with `@import 'tailwindcss'`
+- OKLCH color space for wider color gamut
+- Pre-configured design tokens (radius, colors, spacing)
+- Dark mode ready with custom variant syntax
+- Custom container utility with responsive padding
+
+**Design System:**
+
+- Complete color palette (primary, secondary, muted, accent, destructive)
+- Sidebar colors for dashboard layouts
+- Chart colors (5 variants) for data visualization
+- Consistent border radius system (sm, md, lg, xl)
+- Smooth scrolling enabled globally
+
 ### Best Practices
 
 **Component Organization:**
 
 ```
 ✅ Good Structure
-├── components/
-    ├── layout/
-        ├── header.tsx        # Simple components in single file
-        └── navbar.tsx
-    ├── ui/
-        └── button.tsx        # Reusable UI primitives
+├── app/
+    ├── _layout/              # App-specific layout components
+    │   ├── header.tsx
+    │   └── navbar.tsx
+    ├── _shared/
+        └── components/
+            ├── ui/           # Reusable UI primitives
+            │   └── button.tsx
+            └── utilities/    # Helper components
+                └── show.tsx
 ```
 
 **Server vs Client Components:**
@@ -169,8 +196,15 @@ nextjs-boilerplate/
 **Styling:**
 
 - Use Tailwind utility classes
-- Add global styles to `app/_shared/styles/globals.css`
+- Global styles located in `app/globals.css`
+- Tailwind CSS 4 features:
+  - Modern `@import 'tailwindcss'` syntax
+  - OKLCH color format for better color accuracy
+  - Built-in dark mode support with `@custom-variant dark`
+  - Custom theme tokens with `@theme inline`
+  - Custom utilities with `@utility` (e.g., `container`)
 - Use `cn()` utility for conditional classes
+- Animations via `tw-animate-css` package
 
 ## Available Scripts
 

@@ -1,7 +1,7 @@
 import { Menu } from 'lucide-react';
 import Image from 'next/image';
 
-import { Navbar } from '@/app/_shared/components/layout/navbar';
+import { Navbar } from '@/app/_layout/navbar';
 import { Button } from '@/app/_shared/components/ui/button';
 import {
   Sheet,
