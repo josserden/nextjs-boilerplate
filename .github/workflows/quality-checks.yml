@@ -4,13 +4,13 @@ name: Quality Checks
 on:
   pull_request:
     paths:
-      - 'app/**'
-      - 'package.json'
-      - 'tsconfig.json'
-      - 'next.config.ts'
-      - 'eslint.config.mjs'
-      - '.prettierrc.json'
-      - 'postcss.config.mjs'
+      - '../../old/app/**'
+      - '../../old/package.json'
+      - '../../old/tsconfig.json'
+      - '../../old/next.config.ts'
+      - '../../old/eslint.config.mjs'
+      - '../../old/.prettierrc.json'
+      - '../../old/postcss.config.mjs'
   push:
     branches: [main]
   workflow_dispatch:
