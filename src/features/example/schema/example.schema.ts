@@ -14,5 +14,3 @@ export const exampleSchema = z.object({
     message: 'You must accept the terms and conditions to proceed',
   }),
 });
-
-export type ExampleSchema = z.infer<typeof exampleSchema>;
