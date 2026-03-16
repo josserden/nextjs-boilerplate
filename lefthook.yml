@@ -4,6 +4,8 @@ pre-commit:
     typecheck:
       run: pnpm typecheck
     lint:
-      run: pnpm lint:check
+      run: pnpm lint
+      stage_fixed: true
     format:
-      run: pnpm format:check
+      run: pnpm format
+      stage_fixed: true
