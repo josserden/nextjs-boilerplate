@@ -62,10 +62,41 @@ src/
 
 ### TypeScript
 
-- **Strict mode** is enabled — no `any` without explicit justification
-- Prefer `interface` over `type` for object shapes
+- **Strict mode** is enabled — no `any` without explicit justification; use `unknown` for truly unknown types
+- Prefer `interface` over `type` for object shapes; use `type` for unions, intersections, and mapped types
 - Use `as const` for static config objects (e.g., `siteConfig`)
 - Always use type imports: `import type { Foo } from '...'`
+- Use `readonly` for properties that shouldn't change
+
+### Naming Conventions
+
+- Boolean variables: prefix with `is`, `has`, `can`, `should` — e.g., `isLoading`, `hasError`, `canDelete`
+- Functions: start with a verb — e.g., `getUser`, `createOrder`, `validateInput`
+- Avoid magic numbers — define named constants:
+  ```ts
+  // ✅
+  const MAX_RETRY_ATTEMPTS = 3;
+  // ❌
+  if (attempts > 3) { ... }
+  ```
+
+### Functions
+
+- Use **early returns** to reduce nesting:
+  ```ts
+  // ✅
+  if (!id) return null;
+  // ❌ nested if/else chains
+  ```
+- Keep functions short — aim for under 20-30 lines
+- Single responsibility — each function does one thing
+- Prefer `async/await` over raw Promises
+
+### Comments
+
+- Avoid obvious comments that narrate the code
+- Use comments to explain **why**, not **what**
+- JSDoc only for non-obvious logic or public API surfaces
 
 ### Imports
 
@@ -178,6 +209,24 @@ Never access `process.env` directly — always import from `@/env`.
 - Use **Vitest** + **React Testing Library** + **jest-dom**
 - Test utility functions and shared components — not pages or feature forms
 - Use `toBeInTheDocument()`, `toHaveClass()` etc. from jest-dom
+- Follow **AAA pattern** — Arrange, Act, Assert:
+
+  ```ts
+  it('does something', () => {
+    // Arrange
+    const inputValue = 'hello';
+    const expectedResult = 'HELLO';
+
+    // Act
+    const actualResult = toUpperCase(inputValue);
+
+    // Assert
+    expect(actualResult).toBe(expectedResult);
+  });
+  ```
+
+- Variable naming in tests: `input*`, `mock*`, `actual*`, `expected*`
+- Group related tests with `describe()`, use `it()` with descriptive names
 
 ---
 
