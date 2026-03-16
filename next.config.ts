@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   logging: {
     fetches: {
-      fullUrl: true,
+      fullUrl: process.env.NODE_ENV === 'development',
     },
   },
   images: { formats: ['image/avif', 'image/webp'], qualities: [75, 90] },
