@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Show } from '@/shared/components/utilities/show';
 
@@ -38,7 +38,13 @@ describe('Show', () => {
   });
 
   it('does not call render function when condition is falsy', () => {
-    render(<Show when={null}>{(value: string) => <p>{value}</p>}</Show>);
-    expect(screen.queryByRole('paragraph')).not.toBeInTheDocument();
+    // Arrange
+    const mockRender = vi.fn((value: string) => <p>{value}</p>);
+
+    // Act
+    render(<Show when={null}>{mockRender}</Show>);
+
+    // Assert
+    expect(mockRender).not.toHaveBeenCalled();
   });
 });
