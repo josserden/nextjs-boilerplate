@@ -31,7 +31,18 @@ export async function apiFetch<T>(
     const response = await fetch(url, fetchOptions);
 
     const text = await response.text();
-    const data: unknown = text ? JSON.parse(text) : undefined;
+    let data: unknown;
+
+    try {
+      data = text ? JSON.parse(text) : undefined;
+    } catch {
+      return {
+        ok: false,
+        status: response.status,
+        error: response.statusText || MESSAGES.ERROR.INVALID_RESPONSE,
+        errorData: text,
+      };
+    }
 
     if (!response.ok) return parseBody(data, response.status, response.statusText);
 
