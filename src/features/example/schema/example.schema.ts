@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const formSchema = z.object({
+export const exampleSchema = z.object({
   name: z.string().min(1, 'Name is required').trim().min(3, 'Name must be at least 3 characters'),
   email: z.email('Invalid email address'),
   description: z
@@ -15,4 +15,4 @@ export const formSchema = z.object({
   }),
 });
 
-export type FormSchema = z.infer<typeof formSchema>;
+export type ExampleSchema = z.infer<typeof exampleSchema>;
