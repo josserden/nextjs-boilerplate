@@ -1,21 +1,28 @@
 'use server';
 
 import { exampleSchema } from '@/features/example/schema/example.schema';
-import { actionClient } from '@/shared/lib/safe-action/action-client';
+import { MESSAGES } from '@/shared/constants/messages';
+import { actionClient } from '@/shared/lib/action-client';
+import { createResponse } from '@/shared/utils/create-response';
 
 /**
- * Example Server Actions: Create
- * Place global actions here (user updates, form submissions, etc.)
+ * Example Server Action: Create
+ * Demonstrates apiFetch usage with createResponse for consistent response shape.
  */
 export const createExampleAction = actionClient.inputSchema(exampleSchema).action(async ({ parsedInput }) => {
-  // Simulate API call
-  // const response = await fetch('/api/items', {
+  // Example: calling an external API with apiFetch
+  // const result = await apiFetch<ExampleSchema>('/api/items', {
   //   method: 'POST',
   //   body: JSON.stringify(parsedInput),
+  //   headers: { 'Content-Type': 'application/json' },
   // });
+  //
+  // if (!result.ok) {
+  //   throw new Error(result.error);
+  // }
 
   // Revalidate cache if needed
   // revalidatePath('/');
 
-  return { success: true, data: { ...parsedInput, id: '1' } };
+  return createResponse({ ...parsedInput, id: crypto.randomUUID() }, MESSAGES.SUCCESS.CREATE);
 });
