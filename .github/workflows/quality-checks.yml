@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   quality-checks:
-    name: Type Check, Lint & Format
+    name: Type Check, Lint, Format & Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -51,6 +51,9 @@ jobs:
 
       - name: Format Check
         run: pnpm format:check
+
+      - name: Tests
+        run: pnpm test:run
 
       - name: Build Check
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

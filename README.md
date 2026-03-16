@@ -41,12 +41,18 @@ Modern Next.js boilerplate built with the latest technologies and best practices
 - [Zod](https://zod.dev/) - Schema validation
 - [@t3-oss/env-nextjs](https://env.t3.gg/) - Type-safe environment variables
 
+### Testing
+
+- [Vitest](https://vitest.dev/) - Unit testing framework
+- [React Testing Library](https://testing-library.com/) - Component testing utilities
+
 ### Development Tools
 
 - [ESLint 9](https://eslint.org/) - Linting with flat config
 - [Prettier](https://prettier.io/) - Code formatting
 - [TypeScript ESLint](https://typescript-eslint.io/) - TypeScript linting rules
 - [eslint-plugin-perfectionist](https://perfectionist.dev/) - Import sorting
+- [Lefthook](https://lefthook.dev/) - Git hooks (pre-commit)
 
 ## Requirements
 
@@ -94,7 +100,7 @@ nextjs-boilerplate/
 │   │   ├── globals.css           # Global styles (Tailwind CSS 4)
 │   │   ├── layout.tsx            # Root layout
 │   │   ├── page.tsx              # Home page
-│   │   ├── providers.tsx         # App providers (QueryClient)
+│   │   ├── providers.tsx         # App providers (QueryClient)і мабуть буде актуально мати
 │   │   ├── error.tsx             # Error boundary
 │   │   ├── loading.tsx           # Loading state
 │   │   └── not-found.tsx         # 404 page
@@ -120,6 +126,7 @@ nextjs-boilerplate/
 │   │   ├── types/                # TypeScript type definitions
 │   │   └── utils/                # Utility functions (cn)
 │   └── env.ts                    # Environment variables schema
+│   └── __tests__/                # Unit tests
 ├── public/                       # Static files
 └── ...config files
 ```
@@ -141,4 +148,8 @@ pnpm typecheck        # Run TypeScript type checking
 pnpm format           # Format code with Prettier
 pnpm format:check     # Check code formatting (CI)
 pnpm check            # Run all checks (lint + typecheck + format)
+
+# Testing
+pnpm test             # Run tests in watch mode
+pnpm test:run         # Run tests once (CI)
 ```
