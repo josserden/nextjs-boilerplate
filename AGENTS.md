@@ -215,7 +215,9 @@ runtimeEnv: {
 },
 ```
 
-Never access `process.env` directly — always import from `@/env`.
+Never access `process.env` directly in `src/` — always import from `@/env`.
+
+> **Exception:** `next.config.ts` and other root-level config files may use `process.env` directly — they run at build time before `src/env.ts` is initialized.
 
 ---
 
