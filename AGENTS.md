@@ -33,11 +33,11 @@ src/
 │   │   ├── ui/           # UI primitives (Button, Input, Field, etc.)
 │   │   └── utilities/    # Utility components (Show, List)
 │   ├── config/           # Site-wide configuration (siteConfig)
-│   ├── constants/        # Shared constants
+│   ├── constants/        # Shared constants (stale-time, messages)
 │   ├── hooks/            # Custom React hooks
-│   ├── lib/              # Third-party client configs (QueryClient, actionClient)
+│   ├── lib/              # Third-party client configs (QueryClient, actionClient, apiFetch)
 │   ├── types/            # Shared TypeScript types
-│   └── utils/            # Utility functions (cn)
+│   └── utils/            # Utility functions (cn, createResponse)
 └── env.ts                # Type-safe environment variables
 ```
 
@@ -171,8 +171,24 @@ const { form, action, handleSubmitWithAction } = useHookFormAction(
 
 - Use **TanStack Query** for all client-side data fetching
 - Define query options in `features/[feature]/query/` using `queryOptions()`
-- Use `getQueryClient()` from `src/shared/lib/tanstack/get-query-client.ts` in Server Components
+- Use `getQueryClient()` from `src/shared/lib/get-query-client.ts` in Server Components
 - Use `STALE_TIME` constants from `src/shared/constants/stale-time.ts`
+- Use `apiFetch()` from `src/shared/lib/api-fetch.ts` for all HTTP calls inside Server Actions — never use raw `fetch` directly:
+
+  ```ts
+  import { apiFetch } from '@/shared/lib/api-fetch';
+
+  const result = await apiFetch<User>('/api/users/1', { schema: userSchema });
+
+  if (!result.ok) {
+    throw new Error(result.error); // result.status, result.errorData available
+  }
+
+  return result.data; // typed as User
+  ```
+
+- `apiFetch` returns a **Result type** — always check `result.ok` before accessing `result.data`
+- Pass a `schema` (Zod) to validate and type the response automatically
 
 ---
 
@@ -200,6 +216,40 @@ runtimeEnv: {
 ```
 
 Never access `process.env` directly — always import from `@/env`.
+
+---
+
+## Response Utilities
+
+### MESSAGES constants
+
+Use `MESSAGES` from `src/shared/constants/messages.ts` for all user-facing strings — never use string literals:
+
+```ts
+import { MESSAGES } from '@/shared/constants/messages';
+
+// ✅
+throw new Error(MESSAGES.ERROR.NOT_FOUND);
+return createResponse(data, MESSAGES.SUCCESS.CREATE);
+
+// ❌
+throw new Error('Data not found');
+return { message: 'Successfully created' };
+```
+
+### createResponse
+
+Use `createResponse()` from `src/shared/utils/create-response.ts` as the standard return shape from Server Actions:
+
+```ts
+import { createResponse } from '@/shared/utils/create-response';
+
+return createResponse({ id: newUser.id }, MESSAGES.SUCCESS.CREATE);
+// → { data: { id: '...' }, message: 'Successfully created' }
+```
+
+- Returns `ApiResponse<T>` (`{ data?: T; message?: string }`)
+- Both `data` and `message` are optional — omit either if not needed
 
 ---
 
@@ -251,6 +301,8 @@ Never access `process.env` directly — always import from `@/env`.
 - Do not create files in the project root (except config files)
 - Do not put feature-specific code in `src/shared/`
 - Do not use raw `fetch` in Client Components — use TanStack Query
+- Do not use raw `fetch` in Server Actions — use `apiFetch` from `src/shared/lib/api-fetch.ts`
+- Do not use string literals for error/success messages — use `MESSAGES` constants
 - Do not use raw Server Actions — use `next-safe-action`
 - Do not access `process.env` directly — use `src/env.ts`
 - Do not use `<img>` — use `next/image`

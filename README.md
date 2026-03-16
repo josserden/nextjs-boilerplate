@@ -94,21 +94,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ```
 nextjs-boilerplate/
 ├── src/
-│   ├── app/                      # Next.js App Router
+│   ├── app/                      # Next.js App Router (routing only)
 │   │   ├── api/
 │   │   │   └── health/           # Health check endpoint
 │   │   ├── globals.css           # Global styles (Tailwind CSS 4)
 │   │   ├── layout.tsx            # Root layout
 │   │   ├── page.tsx              # Home page
-│   │   ├── providers.tsx         # App providers (QueryClient)і мабуть буде актуально мати
+│   │   ├── providers.tsx         # App providers (QueryClient)
 │   │   ├── error.tsx             # Error boundary
 │   │   ├── loading.tsx           # Loading state
 │   │   └── not-found.tsx         # 404 page
 │   ├── features/                 # Feature-based modules
 │   │   └── example/              # Example feature
-│   │       ├── action/           # Server Actions
-│   │       ├── components/       # Feature components
-│   │       ├── query/            # TanStack Query hooks
+│   │       ├── action/           # Server Actions (next-safe-action)
+│   │       ├── component/        # Feature-specific components
+│   │       ├── query/            # TanStack Query options
 │   │       └── schema/           # Zod schemas
 │   ├── layout/                   # Global layout components
 │   │   ├── header.tsx
@@ -117,16 +117,16 @@ nextjs-boilerplate/
 │   │   └── mobile-menu.tsx
 │   ├── shared/                   # Shared across features
 │   │   ├── components/
-│   │   │   ├── ui/               # UI primitives (Button, Input, Field, etc.)
+│   │   │   ├── ui/               # UI primitives (Button, Input, Field, Typography, etc.)
 │   │   │   └── utilities/        # Utility components (Show, List)
-│   │   ├── config/               # App configuration (siteConfig)
-│   │   ├── constants/            # Shared constants
+│   │   ├── config/               # Site-wide configuration (siteConfig)
+│   │   ├── constants/            # Shared constants (stale-time, messages)
 │   │   ├── hooks/                # Custom React hooks
-│   │   ├── lib/                  # Third-party client configs
-│   │   ├── types/                # TypeScript type definitions
-│   │   └── utils/                # Utility functions (cn)
-│   └── env.ts                    # Environment variables schema
-│   └── __tests__/                # Unit tests
+│   │   ├── lib/                  # Client configs (QueryClient, actionClient, apiFetch)
+│   │   ├── types/                # TypeScript type definitions (ApiResponse, etc.)
+│   │   └── utils/                # Utility functions (cn, createResponse)
+│   ├── __tests__/                # Unit tests
+│   └── env.ts                    # Type-safe environment variables
 ├── public/                       # Static files
 └── ...config files
 ```
