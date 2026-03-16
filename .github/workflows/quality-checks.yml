@@ -4,13 +4,14 @@ name: Quality Checks
 on:
   pull_request:
     paths:
-      - '../../old/app/**'
-      - '../../old/package.json'
-      - '../../old/tsconfig.json'
-      - '../../old/next.config.ts'
-      - '../../old/eslint.config.mjs'
-      - '../../old/.prettierrc.json'
-      - '../../old/postcss.config.mjs'
+      - 'src/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.json'
+      - 'next.config.ts'
+      - 'eslint.config.mjs'
+      - '.prettierrc.json'
+      - 'postcss.config.mjs'
   push:
     branches: [main]
   workflow_dispatch:
@@ -30,35 +31,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Type Check
-        run: |
-          echo "🔍 Running TypeScript type check..."
-          npm run typecheck
+        run: pnpm typecheck
 
       - name: Lint
-        run: |
-          echo "🔎 Running ESLint..."
-          npm run lint:check
+        run: pnpm lint:check
 
       - name: Format Check
-        run: |
-          echo "💅 Checking code formatting..."
-          npm run format:check
+        run: pnpm format:check
 
       - name: Build Check
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: |
-          echo "🏗️  Building Next.js application..."
-          npm run build
+        run: pnpm build
 
   quality-checks-summary:
     name: Quality Checks Summary

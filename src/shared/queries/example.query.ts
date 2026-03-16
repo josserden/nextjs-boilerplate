@@ -1,0 +1,16 @@
+/**
+ * Example query options for TanStack Query
+ * Place global queries here (user, auth, settings, etc.)
+ */
+
+import { queryOptions } from '@tanstack/react-query';
+
+export const exampleQueryOptions = (id: string) =>
+  queryOptions({
+    queryKey: ['detail', id] as const,
+    queryFn: async () => {
+      // const response = await fetch(`/api/example/${id}`);
+      // return response.json();
+      return { id, data: 'example' };
+    },
+  });
