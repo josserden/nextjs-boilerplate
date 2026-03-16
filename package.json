@@ -3,6 +3,7 @@
   "author": "josserden",
   "version": "3.0.0",
   "license": "MIT",
+  "packageManager": "pnpm@10.20.0",
   "description": "Next.js boilerplate with TypeScript, Tailwind CSS, ESLint, Prettier, and more.",
   "repository": {
     "type": "git",
