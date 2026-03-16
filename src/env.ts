@@ -3,12 +3,18 @@ import { z } from 'zod';
 
 export const env = createEnv({
   /**
+   * Shared environment variables.
+   * Available on both server and client.
+   */
+  shared: {
+    NODE_ENV: z.enum(['development', 'test', 'production']),
+  },
+
+  /**
    * Server-side environment variables.
    * Not available on the client — will throw if accessed in browser.
    */
-  server: {
-    NODE_ENV: z.enum(['development', 'test', 'production']),
-  },
+  server: {},
 
   /**
    * Client-side environment variables.
