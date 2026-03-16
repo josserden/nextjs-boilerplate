@@ -1,12 +1,12 @@
-import eslintConfigPrettier from 'eslint-config-prettier';
-import nextTs from 'eslint-config-next/typescript';
-import nextVitals from 'eslint-config-next/core-web-vitals';
-import perfectionist from 'eslint-plugin-perfectionist';
 import pluginQuery from '@tanstack/eslint-plugin-query';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import perfectionist from 'eslint-plugin-perfectionist';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
-import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
+import tseslint from 'typescript-eslint';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -73,23 +73,20 @@ const eslintConfig = defineConfig([
           type: 'alphabetical',
           order: 'asc',
           ignoreCase: true,
-          newlinesBetween: 'always',
-          groups: ['external', 'internal', 'parent', 'sibling', 'index', 'object', 'unknown', 'type'],
+          newlinesBetween: 1,
+          groups: ['external', 'internal', 'parent', 'sibling', 'index', 'unknown', 'type'],
           internalPattern: ['^@/'],
         },
       ],
     },
   },
-
+  // Override default ignores of eslint-config-next.
   globalIgnores([
-    '*.config.mjs',
-    '*.config.ts',
+    // Default ignores of eslint-config-next:
     '.next/**',
     'out/**',
     'build/**',
     'next-env.d.ts',
-    '.old/**',
-    'public/**',
   ]),
 ]);
 
