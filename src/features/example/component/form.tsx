@@ -97,7 +97,10 @@ export function Form() {
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid} orientation='horizontal'>
                 <Checkbox id='terms' checked={field.value} onCheckedChange={field.onChange} />
-                <Label htmlFor='terms'>Accept terms and conditions</Label>
+                <div className='space-y-0.5'>
+                  <Label htmlFor='terms'>Accept terms and conditions</Label>
+                  {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                </div>
               </Field>
             )}
           />

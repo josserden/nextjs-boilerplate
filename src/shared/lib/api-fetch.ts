@@ -32,19 +32,20 @@ export async function apiFetch<T>(
 
     const text = await response.text();
     let data: unknown;
+    let parseFailed = false;
 
     try {
       data = text ? JSON.parse(text) : undefined;
     } catch {
-      return {
-        ok: false,
-        status: response.status,
-        error: response.statusText || MESSAGES.ERROR.INVALID_RESPONSE,
-        errorData: text,
-      };
+      data = text;
+      parseFailed = true;
     }
 
     if (!response.ok) return parseBody(data, response.status, response.statusText);
+
+    if (parseFailed) {
+      return { ok: false, status: response.status, error: MESSAGES.ERROR.INVALID_RESPONSE, errorData: data };
+    }
 
     return parseSuccess(data, response.status, schema);
   } catch (error) {

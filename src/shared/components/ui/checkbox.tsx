@@ -13,13 +13,12 @@ function Checkbox({ className, ...props }: ComponentProps<typeof CheckboxPrimiti
       data-slot='checkbox'
       className={cn(
         'relative flex size-4 shrink-0 items-center justify-center rounded-lg border',
-        'border-input peer transition-colors outline-none group-has-disabled/field:opacity-50',
+        'border-input bg-input/30 peer transition-colors outline-none group-has-disabled/field:opacity-50',
         'disabled:cursor-not-allowed disabled:opacity-50',
         'after:absolute after:-inset-x-3 after:-inset-y-2',
         'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-3',
         'data-checked:bg-primary data-checked:text-primary-foreground data-checked:border-primary',
         'aria-invalid:aria-checked:border-primary aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:ring-3',
-        'dark:bg-input/30 dark:data-checked:bg-primary dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40',
         className,
       )}
       {...props}
