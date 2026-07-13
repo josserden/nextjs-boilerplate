@@ -145,7 +145,8 @@ export async function createUser(formData: FormData) { ... }
 
 - Action files must have `'use server'` at the top
 - Input is always validated via a Zod schema from the feature's `schema/` folder
-- For protected actions, extend `actionClient` with auth middleware — do not add auth logic inside the action itself. Use `authActionClient` from `src/shared/lib/auth-action-client.ts` (see `src/features/example/action/get-profile.action.ts` for a reference usage) — it runs `getSession()` (`src/shared/lib/session.ts`) and throws `MESSAGES.ERROR.UNAUTHORIZED` before the action body runs, so `ctx.session` is always defined inside the action. `getSession()` is a stub — wire in the real auth provider (NextAuth, Clerk, Lucia, etc.) there, not in the action or the middleware
+- For protected actions, extend `actionClient` with auth middleware — do not add auth logic inside the action itself. Use `authActionClient` from `src/shared/lib/auth-action-client.ts` (see `src/features/example/action/get-profile.action.ts` for a reference usage) — it runs `getSession()` (`src/shared/lib/session.ts`) and throws before the action body runs, so `ctx.session` is always defined inside the action. `getSession()` is a stub — wire in the real auth provider (NextAuth, Clerk, Lucia, etc.) there, not in the action or the middleware
+- `actionClient`'s `handleServerError` (`src/shared/lib/action-client.ts`) collapses every thrown error down to `MESSAGES.ERROR.INTERNAL` by default, so the client never sees the real message — this is intentional for unexpected errors. For an expected, user-facing failure (unauthorized, not found, etc.) that the client needs to distinguish, throw `ActionError` from `src/shared/lib/action-error.ts` instead of a plain `Error` — `handleServerError` passes its message through unchanged
 
 ---
 

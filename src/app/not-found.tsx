@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '@/shared/components/ui/button';
+import { buttonVariants } from '@/shared/components/ui/button';
 import { Typography } from '@/shared/components/ui/typography';
 
 export default function NotFound() {
@@ -12,9 +12,9 @@ export default function NotFound() {
 
           <Typography>Could not find requested resource</Typography>
 
-          <Button asChild variant='link'>
-            <Link href='/'>Return Home</Link>
-          </Button>
+          <Link href='/' className={buttonVariants({ variant: 'link' })}>
+            Return Home
+          </Link>
         </div>
       </div>
     </section>

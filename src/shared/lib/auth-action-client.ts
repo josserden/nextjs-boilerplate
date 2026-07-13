@@ -1,5 +1,6 @@
 import { MESSAGES } from '@/shared/constants/messages';
 import { actionClient } from '@/shared/lib/action-client';
+import { ActionError } from '@/shared/lib/action-error';
 import { getSession } from '@/shared/lib/session';
 
 /**
@@ -11,7 +12,7 @@ export const authActionClient = actionClient.use(async ({ next }) => {
   const session = await getSession();
 
   if (!session) {
-    throw new Error(MESSAGES.ERROR.UNAUTHORIZED);
+    throw new ActionError(MESSAGES.ERROR.UNAUTHORIZED);
   }
 
   return next({ ctx: { session } });

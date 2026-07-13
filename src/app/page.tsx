@@ -1,4 +1,5 @@
 import { Form } from '@/features/example/component/form';
+import { ProfileExample } from '@/features/example/component/profile-example';
 import { SearchExample } from '@/features/example/component/search-example';
 import { loadExampleSearchParams } from '@/features/example/search-params/example.search-params';
 import { Typography } from '@/shared/components/ui/typography';
@@ -10,7 +11,7 @@ interface HomeProps {
 }
 
 export default async function Home({ searchParams }: HomeProps) {
-  const { q, sort } = await loadExampleSearchParams(searchParams);
+  const { q, sort } = await loadExampleSearchParams(searchParams, { strict: true });
 
   return (
     <section className='py-20'>
@@ -37,6 +38,12 @@ export default async function Home({ searchParams }: HomeProps) {
         </Typography>
 
         <Form />
+
+        <Typography variant='h2' className='text-center'>
+          Example Protected Action
+        </Typography>
+
+        <ProfileExample />
       </div>
     </section>
   );

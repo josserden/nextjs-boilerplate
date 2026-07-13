@@ -2,7 +2,7 @@ import { Menu } from 'lucide-react';
 import Image from 'next/image';
 
 import { Navbar } from '@/layout/navbar';
-import { Button, buttonVariants } from '@/shared/components/ui/button';
+import { buttonVariants } from '@/shared/components/ui/button';
 import {
   Sheet,
   SheetClose,
@@ -35,9 +35,7 @@ export function MobileMenu() {
         </div>
 
         <SheetFooter>
-          <SheetClose asChild>
-            <Button variant='outline'>Close</Button>
-          </SheetClose>
+          <SheetClose className={buttonVariants({ variant: 'outline' })}>Close</SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>
