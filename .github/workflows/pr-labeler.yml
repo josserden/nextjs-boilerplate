@@ -1,0 +1,30 @@
+name: PR Labeler
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Apply label from PR title
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          TYPE=$(echo "$PR_TITLE" | grep -oE '^[a-z]+')
+
+          case "$TYPE" in
+            feat|fix|chore|docs|refactor|test|perf) ;;
+            *)
+              echo "No matching conventional commit type in PR title, skipping"
+              exit 0
+              ;;
+          esac
+
+          gh pr edit "$PR_NUMBER" --repo "${{ github.repository }}" --add-label "$TYPE"
