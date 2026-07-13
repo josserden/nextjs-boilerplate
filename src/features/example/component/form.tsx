@@ -98,7 +98,9 @@ export function Form() {
               <Field data-invalid={fieldState.invalid} orientation='horizontal'>
                 <Checkbox id='terms' checked={field.value} onCheckedChange={field.onChange} />
                 <div className='space-y-0.5'>
-                  <Label htmlFor='terms'>Accept terms and conditions</Label>
+                  <Label htmlFor='terms' className='cursor-pointer'>
+                    Accept terms and conditions
+                  </Label>
                   {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                 </div>
               </Field>

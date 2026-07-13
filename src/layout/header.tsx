@@ -7,7 +7,7 @@ export function Header() {
   return (
     <header className='border-border relative border-b py-4'>
       <div className='container flex items-center justify-between'>
-        <Image src='next.svg' alt='site logo' width={120} height={40} priority />
+        <Image src='next.svg' alt='site logo' width={120} height={24} priority />
         <Navbar listClassName='hidden items-center gap-x-3 md:flex' />
         <MobileMenu />
       </div>

@@ -3,7 +3,7 @@
 import { XIcon } from 'lucide-react';
 import { Dialog as SheetPrimitive } from 'radix-ui';
 
-import { Button } from '@/shared/components/ui/button';
+import { buttonVariants } from '@/shared/components/ui/button';
 import { cn } from '@/shared/utils/cn';
 
 import type { ComponentProps } from 'react';
@@ -71,11 +71,12 @@ function SheetContent({
       >
         {children}
         {showCloseButton && (
-          <SheetPrimitive.Close data-slot='sheet-close' asChild>
-            <Button variant='ghost' className='absolute top-3 right-3 size-7 p-0'>
-              <XIcon />
-              <span className='sr-only'>Close</span>
-            </Button>
+          <SheetPrimitive.Close
+            data-slot='sheet-close'
+            className={buttonVariants({ variant: 'ghost', className: 'absolute top-3 right-3 size-7 p-0' })}
+          >
+            <XIcon />
+            <span className='sr-only'>Close</span>
           </SheetPrimitive.Close>
         )}
       </SheetPrimitive.Content>

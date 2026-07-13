@@ -38,10 +38,10 @@ Modern Next.js boilerplate built with the latest technologies and best practices
 
 ### Data & Forms
 
-- [TanStack Query](https://tanstack.com/query) - Data fetching and caching
 - [next-safe-action](https://next-safe-action.dev/) - Type-safe Server Actions with validation
 - [React Hook Form](https://react-hook-form.com/) - Performant forms
 - [Zod](https://zod.dev/) - Schema validation
+- [nuqs](https://nuqs.dev/) - Type-safe URL search params state
 - [@t3-oss/env-nextjs](https://env.t3.gg/) - Type-safe environment variables
 
 ### Testing
@@ -103,7 +103,7 @@ nextjs-boilerplate/
 │   │   ├── globals.css           # Global styles (Tailwind CSS 4)
 │   │   ├── layout.tsx            # Root layout
 │   │   ├── page.tsx              # Home page
-│   │   ├── providers.tsx         # App providers (QueryClient)
+│   │   ├── providers.tsx         # App providers (nuqs, etc.)
 │   │   ├── error.tsx             # Error boundary
 │   │   ├── loading.tsx           # Loading state
 │   │   └── not-found.tsx         # 404 page
@@ -111,8 +111,8 @@ nextjs-boilerplate/
 │   │   └── example/              # Example feature
 │   │       ├── action/           # Server Actions (next-safe-action)
 │   │       ├── component/        # Feature-specific components
-│   │       ├── query/            # TanStack Query options
-│   │       └── schema/           # Zod schemas
+│   │       ├── schema/           # Zod schemas
+│   │       └── search-params/    # nuqs parsers (URL state)
 │   ├── layout/                   # Global layout components
 │   │   ├── header.tsx
 │   │   ├── footer.tsx
@@ -123,9 +123,9 @@ nextjs-boilerplate/
 │   │   │   ├── ui/               # UI primitives (Button, Input, Field, Typography, etc.)
 │   │   │   └── utilities/        # Utility components (Show, List)
 │   │   ├── config/               # Site-wide configuration (siteConfig)
-│   │   ├── constants/            # Shared constants (stale-time, messages)
+│   │   ├── constants/            # Shared constants (messages)
 │   │   ├── hooks/                # Custom React hooks
-│   │   ├── lib/                  # Client configs (QueryClient, actionClient, apiFetch)
+│   │   ├── lib/                  # Client configs (actionClient, apiFetch)
 │   │   ├── types/                # TypeScript type definitions (ApiResponse, etc.)
 │   │   └── utils/                # Utility functions (cn, createResponse)
 │   ├── __tests__/                # Unit tests

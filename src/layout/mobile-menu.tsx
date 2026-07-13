@@ -2,7 +2,7 @@ import { Menu } from 'lucide-react';
 import Image from 'next/image';
 
 import { Navbar } from '@/layout/navbar';
-import { Button } from '@/shared/components/ui/button';
+import { buttonVariants } from '@/shared/components/ui/button';
 import {
   Sheet,
   SheetClose,
@@ -17,17 +17,15 @@ import {
 export function MobileMenu() {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant='ghost' className='md:hidden'>
-          <Menu />
-          <span className='sr-only'>Open mobile menu</span>
-        </Button>
+      <SheetTrigger className={buttonVariants({ variant: 'ghost', className: 'md:hidden' })}>
+        <Menu />
+        <span className='sr-only'>Open mobile menu</span>
       </SheetTrigger>
 
       <SheetContent>
         <SheetHeader>
           <SheetTitle>
-            <Image src='next.svg' alt='site logo' width={120} height={40} loading='lazy' />
+            <Image src='next.svg' alt='site logo' width={120} height={24} loading='lazy' />
           </SheetTitle>
           <SheetDescription className='sr-only'>Site navigation menu</SheetDescription>
         </SheetHeader>
@@ -37,9 +35,7 @@ export function MobileMenu() {
         </div>
 
         <SheetFooter>
-          <SheetClose asChild>
-            <Button variant='outline'>Close</Button>
-          </SheetClose>
+          <SheetClose className={buttonVariants({ variant: 'outline' })}>Close</SheetClose>
         </SheetFooter>
       </SheetContent>
     </Sheet>
