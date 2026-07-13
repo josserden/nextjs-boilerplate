@@ -1,20 +1,18 @@
 'use client';
 
-import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
-import { env } from '@/env';
-import { getQueryClient } from '@/shared/lib/get-query-client';
+import type { LayoutProps } from '@/shared/types/common';
 
-import type { ReactNode } from 'react';
+function sortSearchParamsAlphabetically(search: URLSearchParams) {
+  search.sort();
+  return search;
+}
 
-export default function Providers({ children }: { children: ReactNode }) {
-  const queryClient = getQueryClient();
-
+export default function Providers({ children }: LayoutProps) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <NuqsAdapter defaultOptions={{ shallow: false }} processUrlSearchParams={sortSearchParamsAlphabetically}>
       {children}
-      {env.NODE_ENV === 'development' && <ReactQueryDevtools />}
-    </QueryClientProvider>
+    </NuqsAdapter>
   );
 }
