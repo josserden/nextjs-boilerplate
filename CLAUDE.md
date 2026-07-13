@@ -145,7 +145,7 @@ export async function createUser(formData: FormData) { ... }
 
 - Action files must have `'use server'` at the top
 - Input is always validated via a Zod schema from the feature's `schema/` folder
-- For protected actions, extend `actionClient` with auth middleware — do not add auth logic inside the action itself
+- For protected actions, extend `actionClient` with auth middleware — do not add auth logic inside the action itself. Use `authActionClient` from `src/shared/lib/auth-action-client.ts` (see `src/features/example/action/get-profile.action.ts` for a reference usage) — it runs `getSession()` (`src/shared/lib/session.ts`) and throws `MESSAGES.ERROR.UNAUTHORIZED` before the action body runs, so `ctx.session` is always defined inside the action. `getSession()` is a stub — wire in the real auth provider (NextAuth, Clerk, Lucia, etc.) there, not in the action or the middleware
 
 ---
 
@@ -327,6 +327,17 @@ return createResponse({ id: newUser.id }, MESSAGES.SUCCESS.CREATE);
   ```
 - Images: use `avif`/`webp` (configured in `next.config.ts`), always provide `width` and `height`, use `priority` only for above-the-fold images
 - Never use `loading="lazy"` on above-the-fold images — use `priority` instead
+
+---
+
+## Architecture Decisions (ADRs)
+
+Non-obvious architectural decisions — swapping a default library, picking one pattern over a competing one, removing something that used to be standard — are recorded in `docs/adr/` as lightweight ADRs, not left to be inferred from a commit message or from CLAUDE.md alone.
+
+- One file per decision: `docs/adr/NNNN-short-title.md`, numbered sequentially. Copy `docs/adr/template.md` to start a new one.
+- Write an ADR when: replacing a default dependency (see `docs/adr/0001-nuqs-over-tanstack-query.md` for the reference), choosing one of several viable patterns for a recurring problem (e.g. how URL state is handled), or reversing a previous ADR.
+- Do **not** write an ADR for routine feature work, bug fixes, or anything already fully explained by a CLAUDE.md rule — ADRs are for _why_, not for restating conventions.
+- A new ADR that changes a rule stated elsewhere in this file must be reflected in that rule too — CLAUDE.md documents the current convention, the ADR documents why it changed.
 
 ---
 
