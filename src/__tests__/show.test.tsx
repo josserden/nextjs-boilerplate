@@ -47,4 +47,14 @@ describe('Show', () => {
     // Assert
     expect(mockRender).not.toHaveBeenCalled();
   });
+
+  it('renders children when condition is 0', () => {
+    render(<Show when={0}>{count => <p>Count: {count}</p>}</Show>);
+    expect(screen.getByText('Count: 0')).toBeInTheDocument();
+  });
+
+  it('renders children when condition is an empty string', () => {
+    render(<Show when=''>{value => <p>Value: &quot;{value}&quot;</p>}</Show>);
+    expect(screen.getByText('Value: ""')).toBeInTheDocument();
+  });
 });
