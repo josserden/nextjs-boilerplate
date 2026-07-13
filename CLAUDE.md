@@ -9,9 +9,9 @@ This document defines rules and conventions for AI agents (Claude, Cursor, Copil
 - **Next.js** (App Router) + **React 19** + **TypeScript 5**
 - **Tailwind CSS 4** — utility-first styling
 - **Radix UI** — headless component primitives
-- **TanStack Query** — data fetching and caching
 - **next-safe-action** — type-safe Server Actions
 - **React Hook Form** + **Zod** — form handling and validation
+- **nuqs** — type-safe URL search params state
 - **@t3-oss/env-nextjs** — environment variable validation
 
 ---
@@ -23,19 +23,19 @@ src/
 ├── app/                  # Next.js App Router only (routing files)
 ├── features/             # Feature-based modules (domain logic)
 │   └── [feature]/
-│       ├── action/       # Server Actions (next-safe-action)
-│       ├── component/    # Feature-specific components
-│       ├── query/        # TanStack Query options
-│       └── schema/       # Zod schemas
+│       ├── action/         # Server Actions (next-safe-action)
+│       ├── component/      # Feature-specific components
+│       ├── schema/         # Zod schemas
+│       └── search-params/  # nuqs parsers (URL state)
 ├── layout/               # Global layout components (Header, Footer, Navbar)
 ├── shared/               # Reusable, domain-agnostic code
 │   ├── components/
 │   │   ├── ui/           # UI primitives (Button, Input, Field, etc.)
 │   │   └── utilities/    # Utility components (Show, List)
 │   ├── config/           # Site-wide configuration (siteConfig)
-│   ├── constants/        # Shared constants (stale-time, messages)
+│   ├── constants/        # Shared constants (messages)
 │   ├── hooks/            # Custom React hooks
-│   ├── lib/              # Third-party client configs (QueryClient, actionClient, apiFetch)
+│   ├── lib/              # Third-party client configs (actionClient, apiFetch)
 │   ├── types/            # Shared TypeScript types
 │   └── utils/            # Utility functions (cn, createResponse)
 └── env.ts                # Type-safe environment variables
@@ -56,7 +56,7 @@ src/
 
 ### File & Folder Naming
 
-- Folder names: **singular**, lowercase (`action/`, `schema/`, `component/`, `query/`)
+- Folder names: **singular**, lowercase (`action/`, `schema/`, `component/`, `search-params/`)
 - Component files: `kebab-case.tsx`
 - All non-routing code lives in `src/` — never in the root
 
@@ -115,10 +115,10 @@ src/features/user/
 │   └── create-user.action.ts    # Server Action
 ├── component/
 │   └── create-user-form.tsx     # Client Component
-├── query/
-│   └── user.query.ts            # TanStack Query options
-└── schema/
-    └── user.schema.ts           # Zod schema (shared between action and form)
+├── schema/
+│   └── user.schema.ts           # Zod schema (shared between action and form)
+└── search-params/
+    └── user.search-params.ts    # nuqs parsers (shared between server and client)
 ```
 
 - **Schema is defined once** in `schema/` and imported in both the action and the form
@@ -169,11 +169,8 @@ const { form, action, handleSubmitWithAction } = useHookFormAction(
 
 ## Data Fetching
 
-- Use **TanStack Query** for all client-side data fetching
-- Define query options in `features/[feature]/query/` using `queryOptions()`
-- Use `getQueryClient()` from `src/shared/lib/get-query-client.ts` in Server Components
-- Use `STALE_TIME` constants from `src/shared/constants/stale-time.ts`
-- Use `apiFetch()` from `src/shared/lib/api-fetch.ts` for all HTTP calls inside Server Actions — never use raw `fetch` directly:
+- **Default: fetch data in Server Components** — direct `fetch`/`apiFetch` call, no client-side cache needed for initial render
+- Use `apiFetch()` from `src/shared/lib/api-fetch.ts` for all HTTP calls inside Server Components and Server Actions — never use raw `fetch` directly:
 
   ```ts
   import { apiFetch } from '@/shared/lib/api-fetch';
@@ -189,6 +186,40 @@ const { form, action, handleSubmitWithAction } = useHookFormAction(
 
 - `apiFetch` returns a **Result type** — always check `result.ok` before accessing `result.data`
 - Pass a `schema` (Zod) to validate and type the response automatically
+- For mutations, use Server Actions + `revalidatePath`/`revalidateTag` — this re-renders Server Components (including ones outside the mutating form, e.g. a header) in the same round-trip, without a client-side cache
+- For instant UI feedback while a Server Action is pending, use React's `useOptimistic` — not a client-side cache
+- **Do not add TanStack Query (or any client-side data-fetching library) by default.** It's justified only when a concrete requirement needs one of: polling/interval refetching, refetch-on-window-focus, or client-driven fetches with race-condition-safe caching (search-as-you-type, infinite scroll) — add it to that specific feature when the requirement is real, not preemptively
+
+---
+
+## URL State (nuqs)
+
+Use **nuqs** for any state that should live in the URL — filters, pagination, sort order, tabs, search queries. Never hand-roll `searchParams.get()`/`URLSearchParams` parsing.
+
+- Define parsers once per feature in `features/[feature]/search-params/[feature].search-params.ts`, exported as a plain object (not wrapped in a hook) so the same parsers work in both Server Components and Client Components:
+
+  ```ts
+  import { createLoader, parseAsString, parseAsStringLiteral } from 'nuqs/server';
+
+  const sortOptions = ['asc', 'desc'] as const;
+
+  export const userSearchParamsParsers = {
+    q: parseAsString.withDefault(''),
+    sort: parseAsStringLiteral(sortOptions).withDefault('asc'),
+  };
+
+  export const loadUserSearchParams = createLoader(userSearchParamsParsers);
+  ```
+
+- **`createLoader`** — default choice. Use in the page's Server Component: `await loadUserSearchParams(searchParams)`
+- **`createSearchParamsCache`** — only when a deeply nested Server Component (not the page itself) needs the values without prop drilling (works like React `cache()`; call `.parse()` once in the page, then `.get()`/`.all()` in descendants)
+- In a Client Component, read/write the same values via `useQueryStates(someParsers)` (or `useQueryState` for a single key) from `nuqs` — import parsers from `nuqs/server` in shared files so they stay usable from Server Components
+- The root layout renders `<Providers>`, which wraps `NuqsAdapter` (`nuqs/adapters/next/app`) — add any future global provider inside `src/app/providers.tsx`, do not wrap the tree again deeper down
+- `NuqsAdapter` is configured with `defaultOptions={{ shallow: false }}` — every URL update re-syncs Server Components by default, matching this project's RSC-as-source-of-truth approach. Don't pass `shallow: false` per-call, it's redundant; only override to `shallow: true` for a specific hook if you deliberately want a client-only update that skips the server round-trip
+- `NuqsAdapter` also sorts search params alphabetically on every update (`processUrlSearchParams`) — keeps URLs stable and diff-friendly, no action needed on your part
+- Don't set `history: 'push'` globally on the adapter — it pollutes the Back button across the whole app. Opt into it per-hook only for navigation-like param changes (tabs, modals)
+- Never duplicate parser definitions between a page and its client component — import the shared object from `search-params/`
+- **nuqs parsers only coerce types — they don't validate business rules.** For anything beyond "is this a valid float/int/enum" (ranges, formats, cross-field rules), pipe the loaded values through a Zod schema from `schema/`, or pass `{ strict: true }` to the loader/cache's `parse()` call to throw on invalid raw values instead of silently falling back to the default
 
 ---
 
@@ -303,8 +334,9 @@ return createResponse({ id: newUser.id }, MESSAGES.SUCCESS.CREATE);
 
 - Do not create files in the project root (except config files)
 - Do not put feature-specific code in `src/shared/`
-- Do not use raw `fetch` in Client Components — use TanStack Query
-- Do not use raw `fetch` in Server Actions — use `apiFetch` from `src/shared/lib/api-fetch.ts`
+- Do not use raw `fetch` in Server Components or Server Actions — use `apiFetch` from `src/shared/lib/api-fetch.ts`
+- Do not add TanStack Query (or similar) preemptively — see [Data Fetching](#data-fetching) for when it's justified
+- Do not hand-roll `URLSearchParams`/`searchParams.get()` parsing — use nuqs, see [URL State](#url-state-nuqs)
 - Do not use string literals for error/success messages — use `MESSAGES` constants
 - Do not use raw Server Actions — use `next-safe-action`
 - Do not access `process.env` directly — use `src/env.ts`
