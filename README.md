@@ -2,7 +2,6 @@
 
 [![Quality Checks](https://github.com/josserden/nextjs-boilerplate/actions/workflows/quality-checks.yml/badge.svg)](https://github.com/josserden/nextjs-boilerplate/actions/workflows/quality-checks.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/josserden/nextjs-boilerplate/blob/main/LICENSE)
-[![Latest Release](https://img.shields.io/github/v/release/josserden/nextjs-boilerplate)](https://github.com/josserden/nextjs-boilerplate/releases)
 
 ![banner.png](public%2Fbanner.png)
 
