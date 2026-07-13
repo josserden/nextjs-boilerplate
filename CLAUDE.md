@@ -198,7 +198,8 @@ const { form, action, handleSubmitWithAction } = useHookFormAction(
 - Use `cn()` for conditional classes
 - Use `cva()` for component variants (see `button.tsx` as reference)
 - Use `data-*` attributes for state-based styling (e.g., `data-active`, `data-invalid`, `data-slot`)
-- Dark mode is supported via `.dark` class
+- Dark mode is supported via `.dark` class and semantic tokens (`bg-primary`, `text-foreground`, `border-input`, etc.) defined in `globals.css` — they already invert automatically. **Never use `dark:` utility variants in components**; if a color needs a different dark-mode value, add/adjust the token in `globals.css` instead.
+- **Group related classes into separate strings** inside `cn()` (or an array + `.join(' ')` for a `cva()` base) instead of one long single-line string — see `checkbox.tsx` for the reference pattern. Split by concern: layout/base, disabled state, focus-visible, aria-invalid, etc. Keep genuinely short class strings (a handful of classes) on one line — don't split for the sake of splitting.
 
 ---
 
