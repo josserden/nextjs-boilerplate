@@ -7,6 +7,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -28,10 +29,11 @@ export function MobileMenu() {
           <SheetTitle>
             <Image src='next.svg' alt='site logo' width={120} height={40} loading='lazy' />
           </SheetTitle>
+          <SheetDescription className='sr-only'>Site navigation menu</SheetDescription>
         </SheetHeader>
 
         <div className='flex-1 p-4'>
-          <Navbar className='space-y-5' />
+          <Navbar listClassName='space-y-5' />
         </div>
 
         <SheetFooter>
