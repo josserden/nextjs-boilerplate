@@ -10,7 +10,7 @@ interface ShowProps<T> {
 }
 
 export function Show<T>({ when, fallback = null, asChild = false, children }: ShowProps<T>) {
-  if (!when) return <>{fallback}</>;
+  if (when === null || when === undefined || when === false) return <>{fallback}</>;
 
   const value = when as NonNullable<T>;
   const content = typeof children === 'function' ? children(value) : children;
