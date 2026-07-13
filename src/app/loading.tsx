@@ -1,8 +1,10 @@
+import { Typography } from '@/shared/components/ui/typography';
+
 export default function Loading() {
   return (
     <section className='py-20'>
       <div className='container'>
-        <p>Loading...</p>
+        <Typography>Loading...</Typography>
       </div>
     </section>
   );
