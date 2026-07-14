@@ -31,7 +31,7 @@ export function MobileMenu() {
         </SheetHeader>
 
         <div className='flex-1 p-4'>
-          <Navbar listClassName='space-y-5' />
+          <Navbar className='space-y-5' />
         </div>
 
         <SheetFooter>

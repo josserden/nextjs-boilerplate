@@ -31,7 +31,7 @@ src/
 ├── shared/               # Reusable, domain-agnostic code
 │   ├── components/
 │   │   ├── ui/           # UI primitives (Button, Input, Field, etc.)
-│   │   └── utilities/    # Utility components (Show, List)
+│   │   └── utilities/    # Utility components (Show, For)
 │   ├── config/           # Site-wide configuration (siteConfig)
 │   ├── constants/        # Shared constants (messages)
 │   ├── hooks/            # Custom React hooks
