@@ -8,15 +8,15 @@ import type { ComponentProps } from 'react';
 export function Navbar({ className, ...props }: ComponentProps<'nav'>) {
   return (
     <nav {...props}>
-      <div role='list' className={cn(className)}>
+      <ul className={cn(className)}>
         <For each={siteConfig.navLinks}>
           {item => (
-            <NavLink key={item.label.toLowerCase()} href={item.href} role='listitem'>
-              {item.label}
-            </NavLink>
+            <li key={item.label.toLowerCase()}>
+              <NavLink href={item.href}>{item.label}</NavLink>
+            </li>
           )}
         </For>
-      </div>
+      </ul>
     </nav>
   );
 }
