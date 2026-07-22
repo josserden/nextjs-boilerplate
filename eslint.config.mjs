@@ -1,6 +1,7 @@
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 import perfectionist from 'eslint-plugin-perfectionist';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -19,9 +20,23 @@ const eslintConfig = defineConfig([
       'react-hooks': reactHooks,
     },
 
+    settings: {
+      'jsx-a11y': {
+        components: {
+          Image: 'img',
+          Link: 'a',
+          NavLink: 'a',
+        },
+      },
+    },
+
     rules: {
       // React & React Hooks
       ...reactHooks.configs.recommended.rules,
+
+      // Accessibility (jsx-a11y) — plugin already registered by eslint-config-next/core-web-vitals,
+      // extend its rules with the full recommended set instead of re-registering the plugin
+      ...jsxA11y.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       'react/display-name': 'error',
